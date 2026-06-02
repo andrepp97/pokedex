@@ -1,0 +1,19 @@
+import type { PokemonProps } from "../types/pokemons";
+
+export const Card = ({ pokemon }: { pokemon: PokemonProps }) => {
+  const splittedUrl = pokemon.url.split("/");
+  const pokemonId = splittedUrl[splittedUrl.length - 2];
+  const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+
+  const dynamicPokemonId = () => String(pokemonId).padStart(4, "0");
+
+  return (
+    <div className="bg-gray-700 p-2 rounded-lg shadow flex flex-col items-center hover:bg-gray-600 transition cursor-pointer">
+      <img src={imgUrl} alt={pokemon.name} height={100} width={100} />
+      <span className="block text-sm text-gray-400 tracking-wide">
+        #{dynamicPokemonId()}
+      </span>
+      <h3 className="text-lg capitalize tracking-wider">{pokemon.name}</h3>
+    </div>
+  );
+};
