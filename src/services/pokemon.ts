@@ -11,3 +11,13 @@ export const fetchPokemonList = async (limit: number, offset: number) => {
     throw error;
   }
 };
+
+export const fetchPokemonDetail = async (id: number) => {
+  try {
+    const response = await customAxios.get(`/pokemon/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching Pokemon detail: ", error);
+    throw error;
+  }
+};

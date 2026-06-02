@@ -1,31 +1,64 @@
-import { useCallback, useEffect, useState } from "react";
-import { Header, List } from "../components";
+import { useEffect, useRef, useState } from "react";
+import { Button, Header, List } from "../components";
 import { fetchPokemonList } from "../services/pokemon";
+import type { PokemonProps } from "../types/pokemons";
+
+const LIMIT = 48;
 
 const Home = () => {
-    // State
-    const [pokemons, setPokemons] = useState([]);
+  // State
+  const [pokemons, setPokemons] = useState<PokemonProps[]>([]);
+  const [offset, setOffset] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
-  // Functions
-  const fetchPokemon = useCallback(async () => {
-    try {
-      const pokemonList = await fetchPokemonList(48, 0);
-      setPokemons(pokemonList.results);
-    } catch (error) {
-      console.error("Error loading Pokemon: ", error);
-    }
-  }, []);
+  // Ref untuk melacak offset yang sudah di-fetch
+  const fetchedOffsets = useRef(new Set<number>());
 
-  // Lifecycle
   useEffect(() => {
-    fetchPokemon();
-  }, [fetchPokemon]);
+    // Cek apakah offset sudah pernah di-fetch sebelumnya
+    if (fetchedOffsets.current.has(offset)) {
+      return;
+    }
 
-  //   Render
+    fetchedOffsets.current.add(offset);
+
+    const loadPokemon = async () => {
+      try {
+        setLoading(true);
+
+        const pokemonList = await fetchPokemonList(LIMIT, offset);
+
+        setPokemons((prev) => [...prev, ...pokemonList.results]);
+
+        setHasMore(pokemonList.results.length > 0);
+      } catch (error) {
+        console.error("Failed to load pokemon:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPokemon();
+  }, [offset]);
+
   return (
     <div>
       <Header />
+
       <List pokemons={pokemons} />
+
+      {hasMore && (
+        <div className="py-4">
+          <Button
+            onClick={() => setOffset((prev) => prev + LIMIT)}
+            disabled={loading}
+            variant="ghost"
+          >
+            {loading ? "Loading..." : "Load More"}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
