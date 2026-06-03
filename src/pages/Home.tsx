@@ -3,7 +3,7 @@ import { Button, Header, List } from "../components";
 import { fetchPokemonList } from "../services/pokemon";
 import type { PokemonProps } from "../types/pokemons";
 
-const LIMIT = 48;
+const LIMIT = 12;
 
 const Home = () => {
   // State
@@ -53,7 +53,7 @@ const Home = () => {
           <Button
             onClick={() => setOffset((prev) => prev + LIMIT)}
             disabled={loading}
-            variant="ghost"
+            variant="secondary"
           >
             {loading ? "Loading..." : "Load More"}
           </Button>

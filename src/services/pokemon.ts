@@ -12,7 +12,7 @@ export const fetchPokemonList = async (limit: number, offset: number) => {
   }
 };
 
-export const fetchPokemonDetail = async (id: number) => {
+export const fetchPokemonDetail = async (id: string) => {
   try {
     const response = await customAxios.get(`/pokemon/${id}`);
     return response.data;

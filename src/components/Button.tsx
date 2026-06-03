@@ -20,7 +20,7 @@ export const Button = ({
       onClick={onClick}
       disabled={disabled}
       className={`
-        block mx-auto mb-4 px-4 py-2 rounded
+        block mx-auto mb-4 px-6 py-2 rounded
         transition font-semibold tracking-wide
         disabled:opacity-50 disabled:cursor-not-allowed
         cursor-pointer
