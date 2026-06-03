@@ -16,7 +16,6 @@ export const Card = ({ pokemon }: { pokemon: PokemonProps }) => {
       try {
         const pokemonDetail = await fetchPokemonDetail(pokemonId);
         setPokemonDetail(pokemonDetail);
-        console.log("Pokemon detail: ", pokemonDetail);
       } catch (error) {
         console.error("Error fetching Pokemon detail: ", error);
       }
