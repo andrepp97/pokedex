@@ -10,6 +10,6 @@ const axiosInstance = axios.create({
 });
 
 export const customAxios = setupCache(axiosInstance, {
-  ttl: 10 * 60 * 1000, // Cache responses for 10 minutes
+  ttl: 30 * 60 * 1000, // Cache responses for 10 minutes
   methods: ["get"],
 });

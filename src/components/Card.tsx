@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { Badge } from "./Badge";
 import { usePokemonFilter } from "../context/PokemonContext";
 import { fetchPokemonDetail } from "../services/pokemon";
@@ -34,7 +35,10 @@ export const Card = ({ pokemon }: { pokemon: PokemonProps }) => {
   }, [pokemonDetail, selectedType]);
 
   return selectedType === "all" || isValidPokemon ? (
-    <div className="bg-gray-700 p-2 rounded-lg shadow flex flex-col items-center hover:bg-gray-600 transition cursor-pointer">
+    <Link
+      to={`/pokemon/${pokemonId}`}
+      className="bg-gray-700 p-2 rounded-lg shadow flex flex-col items-center hover:bg-gray-600 transition cursor-pointer"
+    >
       <img
         src={imgUrl}
         alt={pokemon.name}
@@ -55,6 +59,6 @@ export const Card = ({ pokemon }: { pokemon: PokemonProps }) => {
           )}
         </div>
       ) : null}
-    </div>
+    </Link>
   ) : null;
 };

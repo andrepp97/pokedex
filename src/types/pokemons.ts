@@ -17,3 +17,29 @@ export interface ButtonProps {
   disabled?: boolean;
   variant?: "primary" | "secondary" | "ghost";
 }
+
+export interface PokemonDetailProps {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  base_experience: number;
+  sprites: {
+    other: {
+      "official-artwork": {
+        front_default: string;
+      };
+    };
+  };
+  types: {
+    type: {
+      name: string;
+    };
+  }[];
+  stats: {
+    base_stat: number;
+    stat: {
+      name: string;
+    };
+  }[];
+}
