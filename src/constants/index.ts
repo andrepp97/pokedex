@@ -1,3 +1,5 @@
+export const fetchLimit = 12;
+
 export const pokemonTypes = [
   "all",
   "normal",
@@ -17,6 +19,7 @@ export const pokemonTypes = [
   "dragon",
   "steel",
   "dark",
+  "fairy"
 ];
 
 export type PokemonType = (typeof pokemonTypes)[number];

@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Header, List } from "../components";
+import { fetchLimit } from "../constants";
 import { fetchPokemonList } from "../services/pokemon";
 import type { PokemonProps } from "../types/pokemons";
-
-const LIMIT = 12;
 
 const Home = () => {
   // State
@@ -27,7 +26,7 @@ const Home = () => {
       try {
         setLoading(true);
 
-        const pokemonList = await fetchPokemonList(LIMIT, offset);
+        const pokemonList = await fetchPokemonList(fetchLimit, offset);
 
         setPokemons((prev) => [...prev, ...pokemonList.results]);
 
@@ -51,7 +50,7 @@ const Home = () => {
       {hasMore && (
         <div className="py-4">
           <Button
-            onClick={() => setOffset((prev) => prev + LIMIT)}
+            onClick={() => setOffset((prev) => prev + fetchLimit)}
             disabled={loading}
             variant="secondary"
           >

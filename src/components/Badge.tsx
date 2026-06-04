@@ -23,6 +23,7 @@ const badgeColors: Record<PokemonType, string> = {
   dragon: "bg-indigo-700 text-white",
   steel: "bg-slate-500 text-white",
   dark: "bg-gray-800 text-white",
+  fairy: "bg-pink-300 text-black",
 };
 
 export const Badge = ({ variant }: BadgeProps) => {
@@ -31,7 +32,7 @@ export const Badge = ({ variant }: BadgeProps) => {
       className={`
         inline-flex items-center
         px-3 py-1
-        rounded-lg
+        rounded-full
         text-xs font-semibold
         capitalize
         transition

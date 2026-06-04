@@ -1,8 +1,8 @@
-export const Dropdown = ({ options }: any) => {
+export const Dropdown = ({ options, ...rest }: any) => {
   return (
     <div className="w-full max-w-xs">
       <div className="relative">
-        <select className="w-full font-medium tracking-wider text-sm border text-slate-200 border-gray-600 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-500 hover:border-slate-500 shadow-sm focus:shadow-md appearance-none cursor-pointer">
+        <select className="w-full font-medium tracking-wider text-sm border text-slate-200 border-gray-600 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-500 hover:border-slate-500 shadow-sm focus:shadow-md appearance-none cursor-pointer" {...rest}>
           {options.map((option: any) => (
             <option
               key={option.value}
