@@ -66,12 +66,15 @@ npm run preview
 
 ```text
 src/
+├── assets/
 ├── components/
+├── constants/
+├── context/
+├── layout/
 ├── pages/
 ├── services/
-├── types/
-├── hooks/
-└── assets/
+├── styles/
+└── types/
 ```
 
 ## API
