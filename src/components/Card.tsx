@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Badge } from "./Badge";
+import { usePokemonFilter } from "../context/PokemonContext";
 import { fetchPokemonDetail } from "../services/pokemon";
 import type { PokemonProps } from "../types/pokemons";
 
 export const Card = ({ pokemon }: { pokemon: PokemonProps }) => {
+  const { selectedType } = usePokemonFilter();
   const splittedUrl = pokemon.url.split("/");
   const pokemonId = splittedUrl[splittedUrl.length - 2];
   const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
@@ -24,7 +26,14 @@ export const Card = ({ pokemon }: { pokemon: PokemonProps }) => {
     getPokemonDetail();
   }, []);
 
-  return (
+  const isValidPokemon = useMemo(() => {
+    if (!pokemonDetail) return false;
+    return pokemonDetail.types.some(
+      (type) => type?.type?.name === selectedType,
+    );
+  }, [pokemonDetail, selectedType]);
+
+  return selectedType === "all" || isValidPokemon ? (
     <div className="bg-gray-700 p-2 rounded-lg shadow flex flex-col items-center hover:bg-gray-600 transition cursor-pointer">
       <img
         src={imgUrl}
@@ -47,5 +56,5 @@ export const Card = ({ pokemon }: { pokemon: PokemonProps }) => {
         </div>
       ) : null}
     </div>
-  );
+  ) : null;
 };
